@@ -1,0 +1,2171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+</head>
+<body>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <form class="row row-cols-lg-auto g-3 align-items-center" name="moonForm">
+        <div class="col-12">
+          <label class="visually-hidden" for="tahun">Tahun</label>
+          <div class="input-group">
+            <input type="number" class="form-control" placeholder="Tahun" id="tahun" name="tahun" required>
+            <span class="input-group-text" id="basic-addon2">H</span>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label class="visually-hidden" for="bulan">Bulan</label>
+          <div class="input-group">
+<!--            <input type="number" class="form-control" placeholder="Bulan" id="bulan" name="bulan">-->
+            <select class="form-select" id="bulan" name="bulan">
+              <option selected>Pilih Bulan</option>
+              <option value="1">Muharram</option>
+              <option value="2">Shafar</option>
+              <option value="3">Rabiul Awal</option>
+              <option value="4">Rabiul Akhir</option>
+              <option value="5">Jumadil Ula</option>
+              <option value="6">Jumadil Akhir</option>
+              <option value="7">Rajab</option>
+              <option value="8">Sya'ban</option>
+              <option value="9">Ramadhan</option>
+              <option value="10">Syawal</option>
+              <option value="11">Dzulqa'dah</option>
+              <option value="12">Dzulhijjah</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mt-4 mb-4" id="cardResult" style="visibility: hidden">
+    <div class="card-body">
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              Hasil Perhitungan
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+              <div class="card mb-2">
+                <div class="card-header">
+                  Hasil Universal Time
+                </div>
+                <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th scope="col">Fase Bulan</th>
+                      <th scope="col">Hari</th>
+                      <th scope="col">Tanggal</th>
+                      <th scope="col">Bulan</th>
+                      <th scope="col">Tahun</th>
+                      <th scope="col">Jam:Menit:Detik</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <th scope="row">Bulan Baru</th>
+                      <td><div id="uthari"></div></td>
+                      <td><div id="uttanggal"></div></td>
+                      <td><div id="utbulan"></div></td>
+                      <td><div id="uttahun"></div></td>
+                      <td><div id="utjam"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Bulan Seperempat Pertama</th>
+                      <td><div id="utsphari"></div></td>
+                      <td><div id="utsptanggal"></div></td>
+                      <td><div id="utspbulan"></div></td>
+                      <td><div id="utsptahun"></div></td>
+                      <td><div id="utspjam"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Bulan Purnama</th>
+                      <td><div id="utbphari"></div></td>
+                      <td><div id="utbptanggal"></div></td>
+                      <td><div id="utbpbulan"></div></td>
+                      <td><div id="utbptahun"></div></td>
+                      <td><div id="utbpjam"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Bulan Seperempat Akhir</th>
+                      <td><div id="utsahari"></div></td>
+                      <td><div id="utsatanggal"></div></td>
+                      <td><div id="utsabulan"></div></td>
+                      <td><div id="utsatahun"></div></td>
+                      <td><div id="utsajam"></div></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              </div>
+              <div class="card mb-2">
+                <div class="card-header">
+                  Hasil Local Time
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th scope="col">Fase Bulan</th>
+                        <th scope="col">Hari</th>
+                        <th scope="col">Tanggal</th>
+                        <th scope="col">Bulan</th>
+                        <th scope="col">Tahun</th>
+                        <th scope="col">Jam:Menit:Detik</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <th scope="row">Bulan Baru</th>
+                        <td><div id="lhari"></div></td>
+                        <td><div id="ltanggal"></div></td>
+                        <td><div id="lbulan"></div></td>
+                        <td><div id="ltahun"></div></td>
+                        <td><div id="ljam"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Bulan Seperempat Pertama</th>
+                        <td><div id="lsphari"></div></td>
+                        <td><div id="lsptanggal"></div></td>
+                        <td><div id="lspbulan"></div></td>
+                        <td><div id="lsptahun"></div></td>
+                        <td><div id="lspjam"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Bulan Purnama</th>
+                        <td><div id="lbphari"></div></td>
+                        <td><div id="lbptanggal"></div></td>
+                        <td><div id="lbpbulan"></div></td>
+                        <td><div id="lbptahun"></div></td>
+                        <td><div id="lbpjam"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Bulan Seperempat Akhir</th>
+                        <td><div id="lsahari"></div></td>
+                        <td><div id="lsatanggal"></div></td>
+                        <td><div id="lsabulan"></div></td>
+                        <td><div id="lsatahun"></div></td>
+                        <td><div id="lsajam"></div></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+              Langkah Langkah Perhitungan
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+            <div class="accordion-body">
+              <div class="card mb-2">
+                <div class="card-header">
+                  Proses Perhitungan
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                    <thead>
+                    <tr>
+                      <th scope="col">Nama Fase Bulan</th>
+                      <th scope="col">Bulan Baru</th>
+                      <th scope="col">Seperempat Pertama</th>
+                      <th scope="col">Bulan Purnama</th>
+                      <th scope="col">Seperempat Akhir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <th scope="row">Nilai K =</th>
+                      <td><div id="k-bb"></div></td>
+                      <td><div id="k-sp"></div></td>
+                      <td><div id="k-bp"></div></td>
+                      <td><div id="k-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nilai T =</th>
+                      <td><div id="t-bb"></div></td>
+                      <td><div id="t-sp"></div></td>
+                      <td><div id="t-bp"></div></td>
+                      <td><div id="t-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nilai E =</th>
+                      <td><div id="e-bb"></div></td>
+                      <td><div id="e-sp"></div></td>
+                      <td><div id="e-bp"></div></td>
+                      <td><div id="e-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Anomali Rata-Rata Matahari (M) =</th>
+                      <td><div id="m-bb"></div></td>
+                      <td><div id="m-sp"></div></td>
+                      <td><div id="m-bp"></div></td>
+                      <td><div id="m-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Anomali Rata-Rata Bulan  (M') =</th>
+                      <td><div id="mprime-bb"></div></td>
+                      <td><div id="mprime-sp"></div></td>
+                      <td><div id="mprime-bp"></div></td>
+                      <td><div id="mprime-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Lintang Bulan (F) =</th>
+                      <td><div id="f-bb"></div></td>
+                      <td><div id="f-sp"></div></td>
+                      <td><div id="f-bp"></div></td>
+                      <td><div id="f-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Omega =</th>
+                      <td><div id="omega-bb"></div></td>
+                      <td><div id="omega-sp"></div></td>
+                      <td><div id="omega-bp"></div></td>
+                      <td><div id="omega-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A1 =</th>
+                      <td><div id="a1-bb"></div></td>
+                      <td><div id="a1-sp"></div></td>
+                      <td><div id="a1-bp"></div></td>
+                      <td><div id="a1-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A2 =</th>
+                      <td><div id="a2-bb"></div></td>
+                      <td><div id="a2-sp"></div></td>
+                      <td><div id="a2-bp"></div></td>
+                      <td><div id="a2-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A3 =</th>
+                      <td><div id="a3-bb"></div></td>
+                      <td><div id="a3-sp"></div></td>
+                      <td><div id="a3-bp"></div></td>
+                      <td><div id="a3-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A4 =</th>
+                      <td><div id="a4-bb"></div></td>
+                      <td><div id="a4-sp"></div></td>
+                      <td><div id="a4-bp"></div></td>
+                      <td><div id="a4-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A5 =</th>
+                      <td><div id="a5-bb"></div></td>
+                      <td><div id="a5-sp"></div></td>
+                      <td><div id="a5-bp"></div></td>
+                      <td><div id="a5-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A6 =</th>
+                      <td><div id="a6-bb"></div></td>
+                      <td><div id="a6-sp"></div></td>
+                      <td><div id="a6-bp"></div></td>
+                      <td><div id="a6-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A7 =</th>
+                      <td><div id="a7-bb"></div></td>
+                      <td><div id="a7-sp"></div></td>
+                      <td><div id="a7-bp"></div></td>
+                      <td><div id="a7-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A8 =</th>
+                      <td><div id="a8-bb"></div></td>
+                      <td><div id="a8-sp"></div></td>
+                      <td><div id="a8-bp"></div></td>
+                      <td><div id="a8-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A9 =</th>
+                      <td><div id="a9-bb"></div></td>
+                      <td><div id="a9-sp"></div></td>
+                      <td><div id="a9-bp"></div></td>
+                      <td><div id="a9-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A10 =</th>
+                      <td><div id="a10-bb"></div></td>
+                      <td><div id="a10-sp"></div></td>
+                      <td><div id="a10-bp"></div></td>
+                      <td><div id="a10-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A11 =</th>
+                      <td><div id="a11-bb"></div></td>
+                      <td><div id="a11-sp"></div></td>
+                      <td><div id="a11-bp"></div></td>
+                      <td><div id="a11-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A12 =</th>
+                      <td><div id="a12-bb"></div></td>
+                      <td><div id="a12-sp"></div></td>
+                      <td><div id="a12-bp"></div></td>
+                      <td><div id="a12-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A13 =</th>
+                      <td><div id="a13-bb"></div></td>
+                      <td><div id="a13-sp"></div></td>
+                      <td><div id="a13-bp"></div></td>
+                      <td><div id="a13-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Argumen Planet A14 =</th>
+                      <td><div id="a14-bb"></div></td>
+                      <td><div id="a14-sp"></div></td>
+                      <td><div id="a14-bp"></div></td>
+                      <td><div id="a14-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">JDE belum terkoreksi =</th>
+                      <td><div id="jde-bb"></div></td>
+                      <td><div id="jde-sp"></div></td>
+                      <td><div id="jde-bp"></div></td>
+                      <td><div id="jde-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Koreksi dari Argumen Planet =</th>
+                      <td><div id="kap-bb"></div></td>
+                      <td><div id="kap-sp"></div></td>
+                      <td><div id="kap-bp"></div></td>
+                      <td><div id="kap-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Koreksi masing-masing fase =</th>
+                      <td><div id="kf-bb"></div></td>
+                      <td><div id="kf-sp"></div></td>
+                      <td><div id="kf-bp"></div></td>
+                      <td><div id="kf-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">JDE terkoreksi (TD) =</th>
+                      <td><div id="td-bb"></div></td>
+                      <td><div id="td-sp"></div></td>
+                      <td><div id="td-bp"></div></td>
+                      <td><div id="td-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Delta T =</th>
+                      <td><div id="deltat-bb"></div></td>
+                      <td><div id="deltat-sp"></div></td>
+                      <td><div id="deltat-bp"></div></td>
+                      <td><div id="deltat-sa"></div></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-4 mt-4">
+                <div class="card-header">
+                  Proses Perhitungan Waktu (Universal Time)
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                    <thead>
+                    <tr>
+                      <th scope="col">Nama Fase Bulan</th>
+                      <th scope="col">Bulan Baru</th>
+                      <th scope="col">Seperempat Pertama</th>
+                      <th scope="col">Bulan Purnama</th>
+                      <th scope="col">Seperempat Akhir</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <th scope="row">JD terkoreksi (Universal Time) =</th>
+                      <td><div id="ujd-bb"></div></td>
+                      <td><div id="ujd-sp"></div></td>
+                      <td><div id="ujd-bp"></div></td>
+                      <td><div id="ujd-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">JD + 0.5 =</th>
+                      <td><div id="ujdsum-bb"></div></td>
+                      <td><div id="ujdsum-sp"></div></td>
+                      <td><div id="ujdsum-bp"></div></td>
+                      <td><div id="ujdsum-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Z =</th>
+                      <td><div id="uz-bb"></div></td>
+                      <td><div id="uz-sp"></div></td>
+                      <td><div id="uz-bp"></div></td>
+                      <td><div id="uz-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">F =</th>
+                      <td><div id="uf-bb"></div></td>
+                      <td><div id="uf-sp"></div></td>
+                      <td><div id="uf-bp"></div></td>
+                      <td><div id="uf-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Alpha = </th>
+                      <td><div id="ualpha-bb"></div></td>
+                      <td><div id="ualpha-sp"></div></td>
+                      <td><div id="ualpha-bp"></div></td>
+                      <td><div id="ualpha-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">A = </th>
+                      <td><div id="ua-bb"></div></td>
+                      <td><div id="ua-sp"></div></td>
+                      <td><div id="ua-bp"></div></td>
+                      <td><div id="ua-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">B = </th>
+                      <td><div id="ub-bb"></div></td>
+                      <td><div id="ub-sp"></div></td>
+                      <td><div id="ub-bp"></div></td>
+                      <td><div id="ub-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">C = </th>
+                      <td><div id="uc-bb"></div></td>
+                      <td><div id="uc-sp"></div></td>
+                      <td><div id="uc-bp"></div></td>
+                      <td><div id="uc-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">D = </th>
+                      <td><div id="ud-bb"></div></td>
+                      <td><div id="ud-sp"></div></td>
+                      <td><div id="ud-bp"></div></td>
+                      <td><div id="ud-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">E = </th>
+                      <td><div id="ue-bb"></div></td>
+                      <td><div id="ue-sp"></div></td>
+                      <td><div id="ue-bp"></div></td>
+                      <td><div id="ue-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Tahun = </th>
+                      <td><div id="utahun-bb"></div></td>
+                      <td><div id="utahun-sp"></div></td>
+                      <td><div id="utahun-bp"></div></td>
+                      <td><div id="utahun-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Bulan = </th>
+                      <td><div id="ubulan-bb"></div></td>
+                      <td><div id="ubulan-sp"></div></td>
+                      <td><div id="ubulan-bp"></div></td>
+                      <td><div id="ubulan-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Tanggal (pecahan) =</th>
+                      <td><div id="utp-bb"></div></td>
+                      <td><div id="utp-sp"></div></td>
+                      <td><div id="utp-bp"></div></td>
+                      <td><div id="utp-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Tanggal (bulat) =</th>
+                      <td><div id="utb-bb"></div></td>
+                      <td><div id="utb-sp"></div></td>
+                      <td><div id="utb-bp"></div></td>
+                      <td><div id="utb-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Jam:Menit:Detik (UT) =</th>
+                      <td><div id="ut-bb"></div></td>
+                      <td><div id="ut-sp"></div></td>
+                      <td><div id="ut-bp"></div></td>
+                      <td><div id="ut-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Nomor hari dalam sepekan =</th>
+                      <td><div id="unh-bb"></div></td>
+                      <td><div id="unh-sp"></div></td>
+                      <td><div id="unh-bp"></div></td>
+                      <td><div id="unh-sa"></div></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Hari =</th>
+                      <td><div id="uh-bb"></div></td>
+                      <td><div id="uh-sp"></div></td>
+                      <td><div id="uh-bp"></div></td>
+                      <td><div id="uh-sa"></div></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2 mt-4">
+                <div class="card-header">
+                  Proses Perhitungan Waktu (Lokal)
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th scope="col">Nama Fase Bulan</th>
+                        <th scope="col">Bulan Baru</th>
+                        <th scope="col">Seperempat Pertama</th>
+                        <th scope="col">Bulan Purnama</th>
+                        <th scope="col">Seperempat Akhir</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                        <th scope="row">JD terkoreksi (Local Time) =</th>
+                        <td><div id="ljd-bb"></div></td>
+                        <td><div id="ljd-sp"></div></td>
+                        <td><div id="ljd-bp"></div></td>
+                        <td><div id="ljd-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">JD + 0.5 =</th>
+                        <td><div id="ljdsum-bb"></div></td>
+                        <td><div id="ljdsum-sp"></div></td>
+                        <td><div id="ljdsum-bp"></div></td>
+                        <td><div id="ljdsum-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Z =</th>
+                        <td><div id="lz-bb"></div></td>
+                        <td><div id="lz-sp"></div></td>
+                        <td><div id="lz-bp"></div></td>
+                        <td><div id="lz-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">F =</th>
+                        <td><div id="lf-bb"></div></td>
+                        <td><div id="lf-sp"></div></td>
+                        <td><div id="lf-bp"></div></td>
+                        <td><div id="lf-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Alpha = </th>
+                        <td><div id="lalpha-bb"></div></td>
+                        <td><div id="lalpha-sp"></div></td>
+                        <td><div id="lalpha-bp"></div></td>
+                        <td><div id="lalpha-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">A = </th>
+                        <td><div id="la-bb"></div></td>
+                        <td><div id="la-sp"></div></td>
+                        <td><div id="la-bp"></div></td>
+                        <td><div id="la-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">B = </th>
+                        <td><div id="lb-bb"></div></td>
+                        <td><div id="lb-sp"></div></td>
+                        <td><div id="lb-bp"></div></td>
+                        <td><div id="lb-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">C = </th>
+                        <td><div id="lc-bb"></div></td>
+                        <td><div id="lc-sp"></div></td>
+                        <td><div id="lc-bp"></div></td>
+                        <td><div id="lc-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">D = </th>
+                        <td><div id="ld-bb"></div></td>
+                        <td><div id="ld-sp"></div></td>
+                        <td><div id="ld-bp"></div></td>
+                        <td><div id="ld-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">E = </th>
+                        <td><div id="le-bb"></div></td>
+                        <td><div id="le-sp"></div></td>
+                        <td><div id="le-bp"></div></td>
+                        <td><div id="le-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Tahun = </th>
+                        <td><div id="ltahun-bb"></div></td>
+                        <td><div id="ltahun-sp"></div></td>
+                        <td><div id="ltahun-bp"></div></td>
+                        <td><div id="ltahun-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Bulan = </th>
+                        <td><div id="lbulan-bb"></div></td>
+                        <td><div id="lbulan-sp"></div></td>
+                        <td><div id="lbulan-bp"></div></td>
+                        <td><div id="lbulan-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Tanggal (pecahan) =</th>
+                        <td><div id="ltp-bb"></div></td>
+                        <td><div id="ltp-sp"></div></td>
+                        <td><div id="ltp-bp"></div></td>
+                        <td><div id="ltp-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Tanggal (bulat) =</th>
+                        <td><div id="ltb-bb"></div></td>
+                        <td><div id="ltb-sp"></div></td>
+                        <td><div id="ltb-bp"></div></td>
+                        <td><div id="ltb-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Jam:Menit:Detik (Local Time) =</th>
+                        <td><div id="lt-bb"></div></td>
+                        <td><div id="lt-sp"></div></td>
+                        <td><div id="lt-bp"></div></td>
+                        <td><div id="lt-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Nomor hari dalam sepekan =</th>
+                        <td><div id="lnh-bb"></div></td>
+                        <td><div id="lnh-sp"></div></td>
+                        <td><div id="lnh-bp"></div></td>
+                        <td><div id="lnh-sa"></div></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Hari =</th>
+                        <td><div id="lh-bb"></div></td>
+                        <td><div id="lh-sp"></div></td>
+                        <td><div id="lh-bp"></div></td>
+                        <td><div id="lh-sa"></div></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<script>
+    document.forms['moonForm'].onsubmit = function (event) {
+      event.preventDefault();
+
+      const x = document.getElementById('cardResult');
+      if (x.style.visibility === 'hidden') {
+        x.style.visibility = 'visible';
+      } else {
+        x.style.visibility = 'visible';
+      }
+
+      const DEGRAD = (Math.atan2(1, 1) * 4) / 180.0;
+
+
+      const bulan = document.forms['moonForm']['bulan'].value;
+      const tahun = document.forms['moonForm']['tahun'].value;
+
+      let k = 0;
+      let t = 0;
+      let e = 0;
+      let m = 0;
+      let mprime = 0;
+      let f = 0;
+      let omega = 0;
+      let a = new Array(14);
+      let jde = 0;
+      let kap = 0;
+      let kf = 0;
+      let td = 0;
+      let findDeltaT = 0;
+      let deltaT = 0;
+
+      let ujd = 0;
+      let ujdsum = 0;
+      let uz = 0;
+      let uf = 0;
+      let ualpha = 0;
+      let ua = 0;
+      let ub = 0;
+      let uc = 0;
+      let ud = 0;
+      let ue = 0;
+      let utahun = 0;
+      let ubulan = 0;
+      let utp = 0;
+      let utb = 0;
+      let ut = 0;
+      let unh = 0;
+
+      let ljd = 0;
+      let ljdsum = 0;
+      let lz = 0;
+      let lf = 0;
+      let lalpha = 0;
+      let la = 0;
+      let lb = 0;
+      let lc = 0;
+      let ld = 0;
+      let le = 0;
+      let ltahun = 0;
+      let lbulan = 0;
+      let ltp = 0;
+      let ltb = 0;
+      let lt = 0;
+      let lnh = 0;
+
+      const month = [
+                    "Januari","Februari","Maret","April",
+                    "Mei","Juni","Juli","Agustus","September",
+                    "Oktober","November","Desember"
+                  ];
+
+      //menghitung delta t
+      const kfordeltat = Math.floor(((Math.abs(12 * tahun) + Math.abs(bulan)) - 17050));
+      const tfordeltaT = (kfordeltat / 1236.85).toFixed(10);
+      let tahunForDeltaT = (2000+100 * tfordeltaT).toFixed(1);
+      if(tahunForDeltaT > 2005){
+        if(tahunForDeltaT <= 2050){
+          findDeltaT = (62.92+0.32217*(tahunForDeltaT-2000)+0.005589*(tahunForDeltaT-2000)*(tahunForDeltaT-2000)).toFixed(1);
+        }
+        else {
+          findDeltaT = 0;
+        }
+      }else {
+        findDeltaT = 0;
+      }
+
+      function moonPhase(){
+
+        function newMoon(){
+          k = Math.floor(((Math.abs(12 * tahun) + Math.abs(bulan)) - 17050));
+          const hasilK = document.getElementById("k-bb");
+          hasilK.innerHTML = `<p>${k}</p>`;
+
+          t = (k / 1236.85).toFixed(10);
+          const hasilT = document.getElementById("t-bb");
+          hasilT.innerHTML = `<p>${t}</p>`;
+
+          e = (1.0 - t * ( 0.002516 - ( 0.0000074 * t))).toFixed(5);
+          const hasilE = document.getElementById("e-bb");
+          hasilE.innerHTML = `<p>${e}</p>`;
+
+          m = (DEGRAD * (((2.5534 + 29.10535669 * k) - 0.0000014 * t * t - ( 0.00000011  * t * t * t)) % 360)).toFixed(5);
+          const hasilM = document.getElementById("m-bb");
+          hasilM.innerHTML = `<p>${m} radian</p>`;
+
+          mprime = (DEGRAD * (((201.5643 + 385.81693528 * k) + 0.0107582 * t * t + (0.00001238 * t * t * t) - (0.000000058 * t * t * t))% 360)).toFixed(5);
+          const hasilMprime = document.getElementById("mprime-bb");
+          hasilMprime.innerHTML = `<p>${mprime} radian</p>`;
+
+          f = (DEGRAD * (((160.7108 + 390.67050274 * k) - 0.0016118 * t * t - (0.0016118 * t * t) - ((0.00000227 * t * t * t) + (0.000000011 * t * t * t * t)))% 360)).toFixed(5);
+          const hasilF = document.getElementById("f-bb");
+          hasilF.innerHTML = `<p>${f} radian</p>`;
+
+          // let om = DEGRAD * ( parseFloat(o / 360) - (o - 360));
+          omega = (DEGRAD * (360 + (124.7746-1.56375588*k+0.0020672*t*t+0.00000215*t*t*t))).toFixed(5);
+          const hasilO = document.getElementById("omega-bb");
+          hasilO.innerHTML = `<p>${omega} radian</p>`;
+
+          a[0] =  (DEGRAD * (299.77 + (0.107408  * k) - (0.009173 * t * t))).toFixed(5);
+          a[1] =  (DEGRAD * (251.88 + (0.016321  * k))).toFixed(5);
+          a[2] =  (DEGRAD * (251.83 + (26.651886 * k))).toFixed(5);
+          a[3] =  (DEGRAD * (349.42 + (36.412478 * k))).toFixed(5);
+          a[4] =  (DEGRAD * (84.66  + (18.206239 * k))).toFixed(5);
+          a[5] =  (DEGRAD * (141.74 + (53.303771 * k))).toFixed(5);
+          a[6] =  (DEGRAD * (207.14 + (2.453732  * k))).toFixed(5);
+          a[7] =  (DEGRAD * (154.84 + (7.306860  * k))).toFixed(5);
+          a[8] =  (DEGRAD * (34.52  + (27.261239 * k))).toFixed(5);
+          a[9] =  (DEGRAD * (207.19 + (0.121824  * k))).toFixed(5);
+          a[10] = (DEGRAD * (291.34 + (1.844379  * k))).toFixed(5);
+          a[11] = (DEGRAD * (161.72 + (24.198154 * k))).toFixed(5);
+          a[12] = (DEGRAD * (239.56 + (25.513099 * k))).toFixed(5);
+          a[13] = (DEGRAD * (331.55 + (3.592518  * k))).toFixed(5);
+
+          const hasilA1 = document.getElementById("a1-bb");
+          hasilA1.innerHTML = `<p>${a[0]} radian</p>`;
+
+          const hasilA2 = document.getElementById("a2-bb");
+          hasilA2.innerHTML = `<p>${a[1]} radian</p>`;
+
+          const hasilA3 = document.getElementById("a3-bb");
+          hasilA3.innerHTML = `<p>${a[2]} radian</p>`;
+
+          const hasilA4 = document.getElementById("a4-bb");
+          hasilA4.innerHTML = `<p>${a[3]} radian</p>`;
+
+          const hasilA5 = document.getElementById("a5-bb");
+          hasilA5.innerHTML = `<p>${a[4]} radian</p>`;
+
+          const hasilA6 = document.getElementById("a6-bb");
+          hasilA6.innerHTML = `<p>${a[5]} radian</p>`;
+
+          const hasilA7 = document.getElementById("a7-bb");
+          hasilA7.innerHTML = `<p>${a[6]} radian</p>`;
+
+          const hasilA8 = document.getElementById("a8-bb");
+          hasilA8.innerHTML = `<p>${a[7]} radian</p>`;
+
+          const hasilA9 = document.getElementById("a9-bb");
+          hasilA9.innerHTML = `<p>${a[8]} radian</p>`;
+
+          const hasilA10 = document.getElementById("a10-bb");
+          hasilA10.innerHTML = `<p>${a[9]} radian</p>`;
+
+          const hasilA11 = document.getElementById("a11-bb");
+          hasilA11.innerHTML = `<p>${a[10]} radian</p>`;
+
+          const hasilA12 = document.getElementById("a12-bb");
+          hasilA12.innerHTML = `<p>${a[11]} radian</p>`;
+
+          const hasilA13 = document.getElementById("a13-bb");
+          hasilA13.innerHTML = `<p>${a[12]} radian</p>`;
+
+          const hasilA14 = document.getElementById("a14-bb");
+          hasilA14.innerHTML = `<p>${a[13]} radian</p>`;
+
+          jde = (2451550.09766+29.530588861*k+0.00015437*t*t-0.00000015*t*t*t+0.00000000073*t*t*t*t).toFixed(5);
+          const hasilJde = document.getElementById("jde-bb");
+          hasilJde.innerHTML = `<p>${jde} hari</p>`;
+
+          kap =  ((325*Math.sin(a[0])+165*Math.sin(a[1])+164*Math.sin(a[2])+126*Math.sin(a[3])+
+                  110*Math.sin(a[4])+62*Math.sin(a[5])+60*Math.sin(a[6])+56*Math.sin(a[7])+
+                  47*Math.sin(a[8])+42*Math.sin(a[9])+40*Math.sin(a[10])+37*Math.sin(a[11])+
+                  35*Math.sin(a[12])+23*Math.sin(a[13]))/1000000).toFixed(5);
+          const hasilKap = document.getElementById("kap-bb");
+          hasilKap.innerHTML = `<p>${kap} hari</p>`;
+
+          kf = ((
+                  -40720*Math.sin(mprime)+17241*e*Math.sin(m)+1608*Math.sin(2*mprime)+1039*Math.sin(2*f)
+                  +739*e*Math.sin(mprime-m)-514*e*Math.sin(Number(mprime)+Number(m))+208*e*e*Math.sin(2*m)
+                  -111*Math.sin(mprime-2*f)-57*Math.sin(Number(mprime)+2*f)+56*e*Math.sin(2*Number(mprime)+Number(m))-42*Math.sin(3*mprime)
+                  +42*e*Math.sin(Number(m)+2*f)+38*e*Math.sin(m-2*f)-24*e*Math.sin(2*mprime-m)-17*Math.sin(omega)
+                  -7*Math.sin(Number(mprime)+2*m)+4*Math.sin(2*(mprime-f))+4*Math.sin(3*m)+3*Math.sin(Number(mprime)+Number(m)-2*f)
+                  +3*Math.sin(2*(Number(mprime)+Number(f)))-3*Math.sin(Number(mprime)+Number(m)+2*f)+3*Math.sin(Number(mprime)-m+2*f)
+                  -2*Math.sin(mprime-m-2*f)-2*Math.sin(3*Number(mprime)+Number(m))+2*Math.sin(4*mprime)
+          )/100000).toFixed(5);
+          const hasilKf = document.getElementById("kf-bb");
+          hasilKf.innerHTML = `<p>${kf} hari</p>`;
+
+          td = (Number(jde) + Number(kap) + Number(kf)).toFixed(5);
+          const hasilTd = document.getElementById("td-bb");
+          hasilTd.innerHTML = `<p>${td} hari</p>`;
+
+          deltaT = (findDeltaT/86400).toFixed(5);
+          const hasilDeltaT = document.getElementById("deltat-bb");
+          hasilDeltaT.innerHTML = `<p>${deltaT} hari</p>`;
+
+          ujd = (td - deltaT).toFixed(5);
+          const hasilUjd = document.getElementById("ujd-bb");
+          hasilUjd.innerHTML = `<p>${ujd} hari</p>`;
+          //konversi ke waktu
+          let millis = (ujd - 2440587.5) * 86400000;
+          let dateLocal = new Date(millis);
+          const utbbjam = document.getElementById("utjam");
+          utbbjam.innerHTML = `<p>${dateLocal.getUTCHours()} : ${dateLocal.getUTCMinutes()} : ${dateLocal.getUTCSeconds()}</p>`;
+          const lbbjam = document.getElementById("ljam");
+          lbbjam.innerHTML = `<p>${dateLocal.getHours()} : ${dateLocal.getMinutes()} : ${dateLocal.getSeconds()}</p>`;
+
+          ujdsum = (Number(ujd) + Number(0.5)).toFixed(5);
+          const hasilUjdSum = document.getElementById("ujdsum-bb");
+          hasilUjdSum.innerHTML = `<p>${ujdsum}</p>`;
+
+          uz = parseInt(ujdsum);
+          const hasilUz = document.getElementById("uz-bb");
+          hasilUz.innerHTML = `<p>${uz}</p>`;
+
+          uf = (ujdsum - uz).toFixed(5);
+          const hasilUf = document.getElementById("uf-bb");
+          hasilUf.innerHTML = `<p>${uf}</p>`;
+
+          ualpha = parseInt((uz-1867216.25)/36524.25);
+          const hasilUalpha = document.getElementById("ualpha-bb");
+          hasilUalpha.innerHTML = `<p>${ualpha}</p>`;
+
+          if(uz<2299161){
+            ua = uz;
+          }else{
+            ua = uz+1+ualpha-parseInt(ualpha/4);
+          }
+          const hasilUa = document.getElementById("ua-bb");
+          hasilUa.innerHTML = `<p>${ua}</p>`;
+
+          ub = ua+1524;
+          const hasilUb = document.getElementById("ub-bb");
+          hasilUb.innerHTML = `<p>${ub}</p>`;
+
+          uc = parseInt((ub-122.1)/365.25);
+          const hasilUc = document.getElementById("uc-bb");
+          hasilUc.innerHTML = `<p>${uc}</p>`;
+
+          ud = parseInt(365.25*uc);
+          const hasilUd = document.getElementById("ud-bb");
+          hasilUd.innerHTML = `<p>${ud}</p>`;
+
+          ue = parseInt((ub-ud)/30.6001);
+          const hasilUe = document.getElementById("ue-bb");
+          hasilUe.innerHTML = `<p>${ue}</p>`;
+
+          if (ue < 14) {
+            ubulan = ue-1;
+          }else {
+            ubulan = ue-13;
+          }
+          const hasilUbulan = document.getElementById("ubulan-bb");
+          hasilUbulan.innerHTML = `<p>${ubulan}</p>`;
+          const utbbbulan = document.getElementById("utbulan");
+          utbbbulan.innerHTML = `<p>${month[ubulan - 1]}</p>`;
+
+          if (ubulan > 2) {
+            utahun = uc-4716;
+          } else {
+            utahun = uc-4715;
+          }
+          const hasilUtahun = document.getElementById("utahun-bb");
+          hasilUtahun.innerHTML = `<p>${utahun}</p>`;
+          const utbbtahun = document.getElementById("uttahun");
+          utbbtahun.innerHTML = `<p>${utahun}</p>`;
+
+          utp = ((ub-ud)-parseInt(30.6001*ue)) + parseFloat(uf);
+          const hasilUtp = document.getElementById("utp-bb");
+          hasilUtp.innerHTML = `<p>${utp}</p>`;
+
+          utb = parseInt(utp);
+          const hasilUtb = document.getElementById("utb-bb");
+          hasilUtb.innerHTML = `<p>${utb}</p>`;
+          const utbbtanggal = document.getElementById("uttanggal");
+          utbbtanggal.innerHTML = `<p>${utb}</p>`;
+
+          ut = (utp-utb).toFixed(5);
+          const hasilUt = document.getElementById("ut-bb");
+          hasilUt.innerHTML = `<p>${dateLocal.getUTCHours()} : ${dateLocal.getUTCMinutes()} : ${dateLocal.getUTCSeconds()}</p>`;
+
+          unh = parseInt((Number(ujd)+1.5)%7) + 1;
+          const hasilUnh = document.getElementById("unh-bb");
+          hasilUnh.innerHTML = `<p>${unh}</p>`;
+
+          let uh;
+          switch (unh) {
+            case 1:
+              uh = "Minggu";
+              break;
+            case 2:
+              uh = "Senin";
+              break;
+            case 3:
+              uh = "Selasa";
+              break;
+            case 4:
+              uh = "Rabu";
+              break;
+            case 5:
+              uh = "Kamis";
+              break;
+            case 6:
+              uh = "Jumat";
+              break;
+            case  7:
+              uh = "Sabtu";
+          }
+          const hasilUh = document.getElementById("uh-bb");
+          hasilUh.innerHTML = `<p>${uh}</p>`;
+          const utbbhari = document.getElementById("uthari");
+          utbbhari.innerHTML = `<p>${uh}</p>`;
+
+          ljd = (Number(ujd) + 7 /24).toFixed(5);
+          const hasilLjd = document.getElementById("ljd-bb");
+          hasilLjd.innerHTML = `<p>${ljd} hari</p>`;
+
+          ljdsum = (Number(ljd) + Number(0.5)).toFixed(5);
+          const hasilLjdSum = document.getElementById("ljdsum-bb");
+          hasilLjdSum.innerHTML = `<p>${ljdsum}</p>`;
+
+          lz = parseInt(ljdsum);
+          const hasilLz = document.getElementById("lz-bb");
+          hasilLz.innerHTML = `<p>${lz}</p>`;
+
+          lf = (ljdsum - lz).toFixed(5);
+          const hasilLf = document.getElementById("lf-bb");
+          hasilLf.innerHTML = `<p>${lf}</p>`;
+
+          lalpha = parseInt((lz-1867216.25)/36524.25);
+          const hasilLalpha = document.getElementById("lalpha-bb");
+          hasilLalpha.innerHTML = `<p>${lalpha}</p>`
+
+          if(lz<2299161){
+            la = lz;
+          }else{
+            la = lz+1+lalpha-parseInt(lalpha/4);
+          }
+          const hasilLa = document.getElementById("la-bb");
+          hasilLa.innerHTML = `<p>${la}</p>`;
+
+          lb = la+1524;
+          const hasilLb = document.getElementById("lb-bb");
+          hasilLb.innerHTML = `<p>${lb}</p>`;
+
+          lc = parseInt((lb-122.1)/365.25);
+          const hasilLc = document.getElementById("lc-bb");
+          hasilLc.innerHTML = `<p>${lc}</p>`;
+
+          ld = parseInt(365.25*lc);
+          const hasilLd = document.getElementById("ld-bb");
+          hasilLd.innerHTML = `<p>${ld}</p>`;
+
+          le = parseInt((lb-ld)/30.6001);
+          const hasilLe = document.getElementById("le-bb");
+          hasilLe.innerHTML = `<p>${le}</p>`;
+
+          if (le < 14) {
+            lbulan = le-1;
+          }else {
+            lbulan = le-13;
+          }
+          const hasilLbulan = document.getElementById("lbulan-bb");
+          hasilLbulan.innerHTML = `<p>${lbulan}</p>`;
+          const lbbbulan = document.getElementById("lbulan");
+          lbbbulan.innerHTML = `<p>${month[lbulan - 1]}</p>`;
+
+          if (lbulan > 2) {
+            ltahun = lc-4716;
+          } else {
+            ltahun = lc-4715;
+          }
+          const hasilLtahun = document.getElementById("ltahun-bb");
+          hasilLtahun.innerHTML = `<p>${ltahun}</p>`;
+          const lbbtahun = document.getElementById("ltahun");
+          lbbtahun.innerHTML = `<p>${ltahun}</p>`;
+
+          ltp = ((lb-ld)-parseInt(30.6001*le)) + parseFloat(lf);
+          const hasilLtp = document.getElementById("ltp-bb");
+          hasilLtp.innerHTML = `<p>${ltp}</p>`;
+
+          ltb = parseInt(ltp);
+          const hasilLtb = document.getElementById("ltb-bb");
+          hasilLtb.innerHTML = `<p>${ltb}</p>`;
+          const lbbtanggal = document.getElementById("ltanggal");
+          lbbtanggal.innerHTML = `<p>${ltb}</p>`;
+
+          lt = (ltp-ltb).toFixed(5);
+          const hasilLt = document.getElementById("lt-bb");
+          hasilLt.innerHTML = `<p>${dateLocal.getHours()} : ${dateLocal.getMinutes()} : ${dateLocal.getSeconds()}</p>`;
+
+          lnh = parseInt((Number(ljd)+1.5)%7) + 1;
+          const hasilLnh = document.getElementById("lnh-bb");
+          hasilLnh.innerHTML = `<p>${lnh}</p>`;
+
+          let lh;
+          switch (lnh) {
+            case 1:
+              lh = "Minggu";
+              break;
+            case 2:
+              lh = "Senin";
+              break;
+            case 3:
+              lh = "Selasa";
+              break;
+            case 4:
+              lh = "Rabu";
+              break;
+            case 5:
+              lh = "Kamis";
+              break;
+            case 6:
+              lh = "Jumat";
+              break;
+            case  7:
+              lh = "Sabtu";
+          }
+          const hasilLh = document.getElementById("lh-bb");
+          hasilLh.innerHTML = `<p>${lh}</p>`;
+          const lbbhari = document.getElementById("lhari");
+          lbbhari.innerHTML = `<p>${lh}</p>`;
+
+        }
+
+        function quarterMoon(){
+          k = ((Math.abs(12 * tahun) + Math.abs(bulan)) - 17050) + Math.abs(0.25);
+          const hasilK = document.getElementById("k-sp");
+          hasilK.innerHTML = `<p>${k}</p>`;
+
+          t = (k / 1236.85).toFixed(10)
+          const hasilT = document.getElementById("t-sp");
+          hasilT.innerHTML = `<p>${t}</p>`;
+
+          e = (1.0 - t * ( 0.002516 - ( 0.0000074 * t))).toFixed(5);
+          const hasilE = document.getElementById("e-sp");
+          hasilE.innerHTML = `<p>${e}</p>`;
+
+          m = (DEGRAD * (((2.5534 + 29.10535669 * k) - 0.0000014 * t * t - ( 0.00000011  * t * t * t)) % 360)).toFixed(5);
+          const hasilM = document.getElementById("m-sp");
+          hasilM.innerHTML = `<p>${m} radian</p>`;
+
+          mprime = (DEGRAD * (((201.5643 + 385.81693528 * k) + 0.0107582 * t * t + (0.00001238 * t * t * t) - (0.000000058 * t * t * t))% 360)).toFixed(5);
+          const hasilMprime = document.getElementById("mprime-sp");
+          hasilMprime.innerHTML = `<p>${mprime} radian</p>`;
+
+          f = (DEGRAD * (((160.7108 + 390.67050274 * k) - 0.0016118 * t * t - (0.0016118 * t * t) - ((0.00000227 * t * t * t) + (0.000000011 * t * t * t * t)))% 360)).toFixed(5);
+          const hasilF = document.getElementById("f-sp");
+          hasilF.innerHTML = `<p>${f} radian</p>`;
+
+          omega = (DEGRAD * (360 + (124.7746-1.56375588*k+0.0020672*t*t+0.00000215*t*t*t))).toFixed(5);
+          const hasilO = document.getElementById("omega-sp");
+          hasilO.innerHTML = `<p>${omega} radian</p>`;
+
+          a[0] =  (DEGRAD * (299.77 + (0.107408  * k) - (0.009173 * t * t))).toFixed(5);
+          a[1] =  (DEGRAD * (251.88 + (0.016321  * k))).toFixed(5);
+          a[2] =  (DEGRAD * (251.83 + (26.651886 * k))).toFixed(5);
+          a[3] =  (DEGRAD * (349.42 + (36.412478 * k))).toFixed(5);
+          a[4] =  (DEGRAD * (84.66  + (18.206239 * k))).toFixed(5);
+          a[5] =  (DEGRAD * (141.74 + (53.303771 * k))).toFixed(5);
+          a[6] =  (DEGRAD * (207.14 + (2.453732  * k))).toFixed(5);
+          a[7] =  (DEGRAD * (154.84 + (7.306860  * k))).toFixed(5);
+          a[8] =  (DEGRAD * (34.52  + (27.261239 * k))).toFixed(5);
+          a[9] =  (DEGRAD * (207.19 + (0.121824  * k))).toFixed(5);
+          a[10] = (DEGRAD * (291.34 + (1.844379  * k))).toFixed(5);
+          a[11] = (DEGRAD * (161.72 + (24.198154 * k))).toFixed(5);
+          a[12] = (DEGRAD * (239.56 + (25.513099 * k))).toFixed(5);
+          a[13] = (DEGRAD * (331.55 + (3.592518  * k))).toFixed(5);
+
+          const hasilA1 = document.getElementById("a1-sp");
+          hasilA1.innerHTML = `<p>${a[0]} radian</p>`;
+
+          const hasilA2 = document.getElementById("a2-sp");
+          hasilA2.innerHTML = `<p>${a[1]} radian</p>`;
+
+          const hasilA3 = document.getElementById("a3-sp");
+          hasilA3.innerHTML = `<p>${a[2]} radian</p>`;
+
+          const hasilA4 = document.getElementById("a4-sp");
+          hasilA4.innerHTML = `<p>${a[3]} radian</p>`;
+
+          const hasilA5 = document.getElementById("a5-sp");
+          hasilA5.innerHTML = `<p>${a[4]} radian</p>`;
+
+          const hasilA6 = document.getElementById("a6-sp");
+          hasilA6.innerHTML = `<p>${a[5]} radian</p>`;
+
+          const hasilA7 = document.getElementById("a7-sp");
+          hasilA7.innerHTML = `<p>${a[6]} radian</p>`;
+
+          const hasilA8 = document.getElementById("a8-sp");
+          hasilA8.innerHTML = `<p>${a[7]} radian</p>`;
+
+          const hasilA9 = document.getElementById("a9-sp");
+          hasilA9.innerHTML = `<p>${a[8]} radian</p>`;
+
+          const hasilA10 = document.getElementById("a10-sp");
+          hasilA10.innerHTML = `<p>${a[9]} radian</p>`;
+
+          const hasilA11 = document.getElementById("a11-sp");
+          hasilA11.innerHTML = `<p>${a[10]} radian</p>`;
+
+          const hasilA12 = document.getElementById("a12-sp");
+          hasilA12.innerHTML = `<p>${a[11]} radian</p>`;
+
+          const hasilA13 = document.getElementById("a13-sp");
+          hasilA13.innerHTML = `<p>${a[12]} radian</p>`;
+
+          const hasilA14 = document.getElementById("a14-sp");
+          hasilA14.innerHTML = `<p>${a[13]} radian</p>`;
+
+          jde = (2451550.09766+29.530588861*k+0.00015437*t*t-0.00000015*t*t*t+0.00000000073*t*t*t*t).toFixed(5);
+          const hasilJde = document.getElementById("jde-sp");
+          hasilJde.innerHTML = `<p>${jde} hari</p>`;
+
+          kap =  ((325*Math.sin(a[0])+165*Math.sin(a[1])+164*Math.sin(a[2])+126*Math.sin(a[3])+
+                  110*Math.sin(a[4])+62*Math.sin(a[5])+60*Math.sin(a[6])+56*Math.sin(a[7])+
+                  47*Math.sin(a[8])+42*Math.sin(a[9])+40*Math.sin(a[10])+37*Math.sin(a[11])+
+                  35*Math.sin(a[12])+23*Math.sin(a[13]))/1000000).toFixed(5);
+          const hasilKap = document.getElementById("kap-sp");
+          hasilKap.innerHTML = `<p>${kap} hari</p>`;
+
+          kf = ((
+                  -62801*Math.sin(mprime)+17172*e*Math.sin(m)-1183*e*Math.sin(Number(mprime)+Number(m))+862*Math.sin(2*mprime)
+                  +804*Math.sin(2*f)+454*e*Math.sin(mprime-m)+204*e*e*Math.sin(2*m)-180*Math.sin(mprime-2*f)
+                  -70*Math.sin(Number(mprime)+2*f)-40*Math.sin(3*mprime)-34*e*Math.sin(2*mprime-m)+32*e*Math.sin(Number(m)+2*f)
+                  +32*e*Math.sin(m-2*f)-28*e*e*Math.sin(Number(mprime)+2*m)+27*e*Math.sin(2*Number(mprime)+Number(m))-17*Math.sin(omega)
+                  -5*Math.sin(mprime-m-2*f)+4*Math.sin(2*(Number(mprime)+Number(f)))-4*Math.sin(Number(mprime)+Number(m)+2*f)+4*Math.sin(mprime-2*m)
+                  +3*Math.sin(3*m)+3*Math.sin(Number(mprime)+Number(m)-2*f)+2*Math.sin(2*(mprime-f))+2*Math.sin(mprime-m+2*f)
+                  -2*Math.sin(3*Number(mprime)+Number(m))+306-38*e*Math.cos(m)+26*Math.cos(mprime)-2*Math.cos(mprime-m)
+                  +2*Math.cos(Number(mprime)+Number(m))+2*Math.cos(2*f)
+          )/100000).toFixed(5);
+          const hasilKf = document.getElementById("kf-sp");
+          hasilKf.innerHTML = `<p>${kf} hari</p>`;
+
+          td = (Number(jde) + Number(kap) + Number(kf)).toFixed(5);
+          const hasilTd = document.getElementById("td-sp");
+          hasilTd.innerHTML = `<p>${td} hari</p>`;
+
+          deltaT = (findDeltaT/86400).toFixed(5);
+          const hasilDeltaT = document.getElementById("deltat-sp");
+          hasilDeltaT.innerHTML = `<p>${deltaT} hari</p>`;
+
+          ujd = (td - deltaT).toFixed(5);
+          const hasilUjd = document.getElementById("ujd-sp");
+          hasilUjd.innerHTML = `<p>${ujd} hari</p>`;
+          let millis = (ujd - 2440587.5) * 86400000;
+          let dateLocal = new Date(millis);
+          const utbbjam = document.getElementById("utspjam");
+          utbbjam.innerHTML = `<p>${dateLocal.getUTCHours()} : ${dateLocal.getUTCMinutes()} : ${dateLocal.getUTCSeconds()}</p>`;
+          const lbbjam = document.getElementById("lspjam");
+          lbbjam.innerHTML = `<p>${dateLocal.getHours()} : ${dateLocal.getMinutes()} : ${dateLocal.getSeconds()}</p>`;
+
+
+          ujdsum = (Number(ujd) + Number(0.5)).toFixed(5);
+          const hasilUjdSum = document.getElementById("ujdsum-sp");
+          hasilUjdSum.innerHTML = `<p>${ujdsum}</p>`;
+
+          uz = parseInt(ujdsum);
+          const hasilUz = document.getElementById("uz-sp");
+          hasilUz.innerHTML = `<p>${uz}</p>`;
+
+          uf = (ujdsum - uz).toFixed(5);
+          const hasilUf = document.getElementById("uf-sp");
+          hasilUf.innerHTML = `<p>${uf}</p>`;
+
+          ualpha = parseInt((uz-1867216.25)/36524.25);
+          const hasilUalpha = document.getElementById("ualpha-sp");
+          hasilUalpha.innerHTML = `<p>${ualpha}</p>`;
+
+          if(uz<2299161){
+            ua = uz;
+          }else{
+            ua = uz+1+ualpha-parseInt(ualpha/4);
+          }
+          const hasilUa = document.getElementById("ua-sp");
+          hasilUa.innerHTML = `<p>${ua}</p>`;
+
+          ub = ua+1524;
+          const hasilUb = document.getElementById("ub-sp");
+          hasilUb.innerHTML = `<p>${ub}</p>`;
+
+          uc = parseInt((ub-122.1)/365.25);
+          const hasilUc = document.getElementById("uc-sp");
+          hasilUc.innerHTML = `<p>${uc}</p>`;
+
+          ud = parseInt(365.25*uc);
+          const hasilUd = document.getElementById("ud-sp");
+          hasilUd.innerHTML = `<p>${ud}</p>`;
+
+          ue = parseInt((ub-ud)/30.6001);
+          const hasilUe = document.getElementById("ue-sp");
+          hasilUe.innerHTML = `<p>${ue}</p>`;
+
+          if (ue < 14) {
+            ubulan = ue-1;
+          }else {
+            ubulan = ue-13;
+          }
+          const hasilUbulan = document.getElementById("ubulan-sp");
+          hasilUbulan.innerHTML = `<p>${ubulan}</p>`;
+          const utspbulan = document.getElementById("utspbulan");
+          utspbulan.innerHTML = `<p>${month[ubulan - 1]}</p>`;
+
+          if (ubulan > 2) {
+            utahun = uc-4716;
+          } else {
+            utahun = uc-4715;
+          }
+          const hasilUtahun = document.getElementById("utahun-sp");
+          hasilUtahun.innerHTML = `<p>${utahun}</p>`;
+          const utsptahun = document.getElementById("utsptahun");
+          utsptahun.innerHTML = `<p>${utahun}</p>`;
+
+          utp = ((ub-ud)-parseInt(30.6001*ue)) + parseFloat(uf);
+          const hasilUtp = document.getElementById("utp-sp");
+          hasilUtp.innerHTML = `<p>${utp}</p>`;
+
+          utb = parseInt(utp);
+          const hasilUtb = document.getElementById("utb-sp");
+          hasilUtb.innerHTML = `<p>${utb}</p>`;
+          const utsptanggal = document.getElementById("utsptanggal");
+          utsptanggal.innerHTML = `<p>${utb}</p>`;
+
+          ut = (utp-utb).toFixed(5);
+          const hasilUt = document.getElementById("ut-sp");
+          hasilUt.innerHTML = `<p>${dateLocal.getUTCHours()} : ${dateLocal.getUTCMinutes()} : ${dateLocal.getUTCSeconds()}</p>`;
+
+          unh = parseInt((Number(ujd)+1.5)%7) + 1;
+          const hasilUnh = document.getElementById("unh-sp");
+          hasilUnh.innerHTML = `<p>${unh}</p>`;
+
+          let uh;
+          switch (unh) {
+            case 1:
+              uh = "Minggu";
+              break;
+            case 2:
+              uh = "Senin";
+              break;
+            case 3:
+              uh = "Selasa";
+              break;
+            case 4:
+              uh = "Rabu";
+              break;
+            case 5:
+              uh = "Kamis";
+              break;
+            case 6:
+              uh = "Jumat";
+              break;
+            case  7:
+              uh = "Sabtu";
+          }
+          const hasilUh = document.getElementById("uh-sp");
+          hasilUh.innerHTML = `<p>${uh}</p>`;
+          const utsphari = document.getElementById("utsphari");
+          utsphari.innerHTML = `<p>${uh}</p>`;
+
+          ljd = (Number(ujd) + 7 /24).toFixed(5);
+          const hasilLjd = document.getElementById("ljd-sp");
+          hasilLjd.innerHTML = `<p>${ljd} hari</p>`;
+
+          ljdsum = (Number(ljd) + Number(0.5)).toFixed(5);
+          const hasilLjdSum = document.getElementById("ljdsum-sp");
+          hasilLjdSum.innerHTML = `<p>${ljdsum}</p>`;
+
+          lz = parseInt(ljdsum);
+          const hasilLz = document.getElementById("lz-sp");
+          hasilLz.innerHTML = `<p>${lz}</p>`;
+
+          lf = (ljdsum - lz).toFixed(5);
+          const hasilLf = document.getElementById("lf-sp");
+          hasilLf.innerHTML = `<p>${lf}</p>`;
+
+          lalpha = parseInt((lz-1867216.25)/36524.25);
+          const hasilLalpha = document.getElementById("lalpha-sp");
+          hasilLalpha.innerHTML = `<p>${lalpha}</p>`;
+
+          if(lz<2299161){
+            la = lz;
+          }else{
+            la = lz+1+lalpha-parseInt(lalpha/4);
+          }
+          const hasilLa = document.getElementById("la-sp");
+          hasilLa.innerHTML = `<p>${la}</p>`;
+
+          lb = la+1524;
+          const hasilLb = document.getElementById("lb-sp");
+          hasilLb.innerHTML = `<p>${lb}</p>`;
+
+          lc = parseInt((lb-122.1)/365.25);
+          const hasilLc = document.getElementById("lc-sp");
+          hasilLc.innerHTML = `<p>${lc}</p>`;
+
+          ld = parseInt(365.25*lc);
+          const hasilLd = document.getElementById("ld-sp");
+          hasilLd.innerHTML = `<p>${ld}</p>`;
+
+          le = parseInt((lb-ld)/30.6001);
+          const hasilLe = document.getElementById("le-sp");
+          hasilLe.innerHTML = `<p>${le}</p>`;
+
+          if (le < 14) {
+            lbulan = le-1;
+          }else {
+            lbulan = le-13;
+          }
+          const hasilLbulan = document.getElementById("lbulan-sp");
+          hasilLbulan.innerHTML = `<p>${lbulan}</p>`;
+          const lspbulan = document.getElementById("lspbulan");
+          lspbulan.innerHTML = `<p>${month[lbulan - 1]}</p>`;
+
+          if (lbulan > 2) {
+            ltahun = lc-4716;
+          } else {
+            ltahun = lc-4715;
+          }
+          const hasilLtahun = document.getElementById("ltahun-sp");
+          hasilLtahun.innerHTML = `<p>${ltahun}</p>`;
+          const lsptahun = document.getElementById("lsptahun");
+          lsptahun.innerHTML = `<p>${ltahun}</p>`;
+
+          ltp = ((lb-ld)-parseInt(30.6001*le)) + parseFloat(lf);
+          const hasilLtp = document.getElementById("ltp-sp");
+          hasilLtp.innerHTML = `<p>${ltp}</p>`;
+
+          ltb = parseInt(ltp);
+          const hasilLtb = document.getElementById("ltb-sp");
+          hasilLtb.innerHTML = `<p>${ltb}</p>`;
+          const lsptanggal = document.getElementById("lsptanggal");
+          lsptanggal.innerHTML = `<p>${ltb}</p>`;
+
+          lt = (ltp-ltb).toFixed(5);
+          const hasilLt = document.getElementById("lt-sp");
+          hasilLt.innerHTML = `<p>${dateLocal.getHours()} : ${dateLocal.getMinutes()} : ${dateLocal.getSeconds()}</p>`;
+
+          lnh = parseInt((Number(ljd)+1.5)%7) + 1;
+          const hasilLnh = document.getElementById("lnh-sp");
+          hasilLnh.innerHTML = `<p>${lnh}</p>`;
+
+          let lh;
+          switch (lnh) {
+            case 1:
+              lh = "Minggu";
+              break;
+            case 2:
+              lh = "Senin";
+              break;
+            case 3:
+              lh = "Selasa";
+              break;
+            case 4:
+              lh = "Rabu";
+              break;
+            case 5:
+              lh = "Kamis";
+              break;
+            case 6:
+              lh = "Jumat";
+              break;
+            case  7:
+              lh = "Sabtu";
+          }
+          const hasilLh = document.getElementById("lh-sp");
+          hasilLh.innerHTML = `<p>${lh}</p>`;
+          const lsphari = document.getElementById("lsphari");
+          lsphari.innerHTML = `<p>${lh}</p>`;
+
+        }
+
+        function fullMoon(){
+          k = ((Math.abs(12 * tahun) + Math.abs(bulan)) - 17050) + Math.abs(0.50);
+          const hasilK = document.getElementById("k-bp");
+          hasilK.innerHTML = `<p>${k}</p>`;
+
+          t = (k / 1236.85).toFixed(10)
+          const hasilT = document.getElementById("t-bp");
+          hasilT.innerHTML = `<p>${t}</p>`;
+
+          e = (1.0 - t * ( 0.002516 - ( 0.0000074 * t))).toFixed(5);
+          const hasilE = document.getElementById("e-bp");
+          hasilE.innerHTML = `<p>${e}</p>`;
+
+          m = (DEGRAD * (((2.5534 + 29.10535669 * k) - 0.0000014 * t * t - ( 0.00000011  * t * t * t)) % 360)).toFixed(5);
+          const hasilM = document.getElementById("m-bp");
+          hasilM.innerHTML = `<p>${m} radian</p>`;
+
+          mprime = (DEGRAD * (((201.5643 + 385.81693528 * k) + 0.0107582 * t * t + (0.00001238 * t * t * t) - (0.000000058 * t * t * t))% 360)).toFixed(5);
+          const hasilMprime = document.getElementById("mprime-bp");
+          hasilMprime.innerHTML = `<p>${mprime} radian</p>`;
+
+          f = (DEGRAD * (((160.7108 + 390.67050274 * k) - 0.0016118 * t * t - (0.0016118 * t * t) - ((0.00000227 * t * t * t) + (0.000000011 * t * t * t * t)))% 360)).toFixed(5);
+          const hasilF = document.getElementById("f-bp");
+          hasilF.innerHTML = `<p>${f} radian</p>`;
+
+          omega = (DEGRAD * (360 + (124.7746-1.56375588*k+0.0020672*t*t+0.00000215*t*t*t))).toFixed(5);
+          const hasilO = document.getElementById("omega-bp");
+          hasilO.innerHTML = `<p>${omega} radian</p>`;
+
+          a[0] =  (DEGRAD * (299.77 + (0.107408  * k) - (0.009173 * t * t))).toFixed(5);
+          a[1] =  (DEGRAD * (251.88 + (0.016321  * k))).toFixed(5);
+          a[2] =  (DEGRAD * (251.83 + (26.651886 * k))).toFixed(5);
+          a[3] =  (DEGRAD * (349.42 + (36.412478 * k))).toFixed(5);
+          a[4] =  (DEGRAD * (84.66  + (18.206239 * k))).toFixed(5);
+          a[5] =  (DEGRAD * (141.74 + (53.303771 * k))).toFixed(5);
+          a[6] =  (DEGRAD * (207.14 + (2.453732  * k))).toFixed(5);
+          a[7] =  (DEGRAD * (154.84 + (7.306860  * k))).toFixed(5);
+          a[8] =  (DEGRAD * (34.52  + (27.261239 * k))).toFixed(5);
+          a[9] =  (DEGRAD * (207.19 + (0.121824  * k))).toFixed(5);
+          a[10] = (DEGRAD * (291.34 + (1.844379  * k))).toFixed(5);
+          a[11] = (DEGRAD * (161.72 + (24.198154 * k))).toFixed(5);
+          a[12] = (DEGRAD * (239.56 + (25.513099 * k))).toFixed(5);
+          a[13] = (DEGRAD * (331.55 + (3.592518  * k))).toFixed(5);
+
+          const hasilA1 = document.getElementById("a1-bp");
+          hasilA1.innerHTML = `<p>${a[0]} radian</p>`;
+
+          const hasilA2 = document.getElementById("a2-bp");
+          hasilA2.innerHTML = `<p>${a[1]} radian</p>`;
+
+          const hasilA3 = document.getElementById("a3-bp");
+          hasilA3.innerHTML = `<p>${a[2]} radian</p>`;
+
+          const hasilA4 = document.getElementById("a4-bp");
+          hasilA4.innerHTML = `<p>${a[3]} radian</p>`;
+
+          const hasilA5 = document.getElementById("a5-bp");
+          hasilA5.innerHTML = `<p>${a[4]} radian</p>`;
+
+          const hasilA6 = document.getElementById("a6-bp");
+          hasilA6.innerHTML = `<p>${a[5]} radian</p>`;
+
+          const hasilA7 = document.getElementById("a7-bp");
+          hasilA7.innerHTML = `<p>${a[6]} radian</p>`;
+
+          const hasilA8 = document.getElementById("a8-bp");
+          hasilA8.innerHTML = `<p>${a[7]} radian</p>`;
+
+          const hasilA9 = document.getElementById("a9-bp");
+          hasilA9.innerHTML = `<p>${a[8]} radian</p>`;
+
+          const hasilA10 = document.getElementById("a10-bp");
+          hasilA10.innerHTML = `<p>${a[9]} radian</p>`;
+
+          const hasilA11 = document.getElementById("a11-bp");
+          hasilA11.innerHTML = `<p>${a[10]} radian</p>`;
+
+          const hasilA12 = document.getElementById("a12-bp");
+          hasilA12.innerHTML = `<p>${a[11]} radian</p>`;
+
+          const hasilA13 = document.getElementById("a13-bp");
+          hasilA13.innerHTML = `<p>${a[12]} radian</p>`;
+
+          const hasilA14 = document.getElementById("a14-bp");
+          hasilA14.innerHTML = `<p>${a[13]} radian</p>`;
+
+          jde = (2451550.09766+29.530588861*k+0.00015437*t*t-0.00000015*t*t*t+0.00000000073*t*t*t*t).toFixed(5);
+          const hasilJde = document.getElementById("jde-bp");
+          hasilJde.innerHTML = `<p>${jde} hari</p>`;
+
+          kap =  ((325*Math.sin(a[0])+165*Math.sin(a[1])+164*Math.sin(a[2])+126*Math.sin(a[3])+
+                  110*Math.sin(a[4])+62*Math.sin(a[5])+60*Math.sin(a[6])+56*Math.sin(a[7])+
+                  47*Math.sin(a[8])+42*Math.sin(a[9])+40*Math.sin(a[10])+37*Math.sin(a[11])+
+                  35*Math.sin(a[12])+23*Math.sin(a[13]))/1000000).toFixed(5);
+          const hasilKap = document.getElementById("kap-bp");
+          hasilKap.innerHTML = `<p>${kap} hari</p>`;
+
+          kf = ((
+                  -40614*Math.sin(mprime)+17302*e*Math.sin(m)+1614*Math.sin(2*mprime)
+                  +1043*Math.sin(2*f)+734*e*Math.sin(mprime-m)-515*e*Math.sin(Number(mprime)+Number(m))
+                  +209*e*e*Math.sin(2*m)-111*Math.sin(mprime-2*f)-57*Math.sin(Number(mprime)+2*f)
+                  +56*e*Math.sin(2*Number(mprime)+Number(m))-42*Math.sin(3*mprime)+42*e*Math.sin(Number(m)+2*f)
+                  +38*e*Math.sin(m-2*f)-24*e*Math.sin(2*mprime-m)-17*Math.sin(omega)
+                  -7*Math.sin(Number(mprime)+2*m)+4*Math.sin(2*(mprime-f))+4*Math.sin(3*m)+3*Math.sin(Number(mprime)+Number(m)-2*f)
+                  +3*Math.sin(2*(Number(mprime)+Number(f)))-3*Math.sin(Number(mprime)+Number(m)+2*f)+3*Math.sin(mprime-Number(m)+2*f)-2*Math.sin(mprime-m-2*f)
+                  -2*Math.sin(3*Number(mprime)+Number(m))+2*Math.sin(4*mprime)
+          )/100000).toFixed(5);
+          const hasilKf = document.getElementById("kf-bp");
+          hasilKf.innerHTML = `<p>${kf} hari</p>`;
+
+          td = (Number(jde) + Number(kap) + Number(kf)).toFixed(5);
+          const hasilTd = document.getElementById("td-bp");
+          hasilTd.innerHTML = `<p>${td} hari</p>`;
+
+          deltaT = (findDeltaT/86400).toFixed(5);
+          const hasilDeltaT = document.getElementById("deltat-bp");
+          hasilDeltaT.innerHTML = `<p>${deltaT} hari</p>`;
+
+          ujd = (td - deltaT).toFixed(5);
+          const hasilUjd = document.getElementById("ujd-bp");
+          hasilUjd.innerHTML = `<p>${ujd} hari</p>`;
+          let millis = (ujd - 2440587.5) * 86400000;
+          let dateLocal = new Date(millis);
+          const utbpjam = document.getElementById("utbpjam");
+          utbpjam.innerHTML = `<p>${dateLocal.getUTCHours()} : ${dateLocal.getUTCMinutes()} : ${dateLocal.getUTCSeconds()}</p>`;
+          const lbpjam = document.getElementById("lbpjam");
+          lbpjam.innerHTML = `<p>${dateLocal.getHours()} : ${dateLocal.getMinutes()} : ${dateLocal.getSeconds()}</p>`;
+
+
+          ujdsum = (Number(ujd) + Number(0.5)).toFixed(5);
+          const hasilUjdSum = document.getElementById("ujdsum-bp");
+          hasilUjdSum.innerHTML = `<p>${ujdsum}</p>`;
+
+          uz = parseInt(ujdsum);
+          const hasilUz = document.getElementById("uz-bp");
+          hasilUz.innerHTML = `<p>${uz}</p>`;
+
+          uf = (ujdsum - uz).toFixed(5);
+          const hasilUf = document.getElementById("uf-bp");
+          hasilUf.innerHTML = `<p>${uf}</p>`;
+
+          ualpha = parseInt((uz-1867216.25)/36524.25);
+          const hasilUalpha = document.getElementById("ualpha-bp");
+          hasilUalpha.innerHTML = `<p>${ualpha}</p>`;
+
+          if(uz<2299161){
+            ua = uz;
+          }else{
+            ua = uz+1+ualpha-parseInt(ualpha/4);
+          }
+          const hasilUa = document.getElementById("ua-bp");
+          hasilUa.innerHTML = `<p>${ua}</p>`;
+
+          ub = ua+1524;
+          const hasilUb = document.getElementById("ub-bp");
+          hasilUb.innerHTML = `<p>${ub}</p>`;
+
+          uc = parseInt((ub-122.1)/365.25);
+          const hasilUc = document.getElementById("uc-bp");
+          hasilUc.innerHTML = `<p>${uc}</p>`;
+
+          ud = parseInt(365.25*uc);
+          const hasilUd = document.getElementById("ud-bp");
+          hasilUd.innerHTML = `<p>${ud}</p>`;
+
+          ue = parseInt((ub-ud)/30.6001);
+          const hasilUe = document.getElementById("ue-bp");
+          hasilUe.innerHTML = `<p>${ue}</p>`;
+
+          if (ue < 14) {
+            ubulan = ue-1;
+          }else {
+            ubulan = ue-13;
+          }
+          const hasilUbulan = document.getElementById("ubulan-bp");
+          hasilUbulan.innerHTML = `<p>${ubulan}</p>`;
+          const utbpbulan = document.getElementById("utbpbulan");
+          utbpbulan.innerHTML = `<p>${month[ubulan-1]}</p>`;
+
+          if (ubulan > 2) {
+            utahun = uc-4716;
+          } else {
+            utahun = uc-4715;
+          }
+          const hasilUtahun = document.getElementById("utahun-bp");
+          hasilUtahun.innerHTML = `<p>${utahun}</p>`;
+          const utbptahun = document.getElementById("utbptahun");
+          utbptahun.innerHTML = `<p>${utahun}</p>`
+
+          utp = ((ub-ud)-parseInt(30.6001*ue)) + parseFloat(uf);
+          const hasilUtp = document.getElementById("utp-bp");
+          hasilUtp.innerHTML = `<p>${utp}</p>`;
+
+          utb = parseInt(utp);
+          const hasilUtb = document.getElementById("utb-bp");
+          hasilUtb.innerHTML = `<p>${utb}</p>`;
+          const utbptanggal = document.getElementById("utbptanggal");
+          utbptanggal.innerHTML = `<p>${utb}</p>`;
+
+          ut = (utp-utb).toFixed(5);
+          const hasilUt = document.getElementById("ut-bp");
+          hasilUt.innerHTML = `<p>${dateLocal.getUTCHours()} : ${dateLocal.getUTCMinutes()} : ${dateLocal.getUTCSeconds()}</p>`;
+
+          unh = parseInt((Number(ujd)+1.5)%7) + 1;
+          const hasilUnh = document.getElementById("unh-bp");
+          hasilUnh.innerHTML = `<p>${unh}</p>`;
+
+          let uh;
+          switch (unh) {
+            case 1:
+              uh = "Minggu";
+              break;
+            case 2:
+              uh = "Senin";
+              break;
+            case 3:
+              uh = "Selasa";
+              break;
+            case 4:
+              uh = "Rabu";
+              break;
+            case 5:
+              uh = "Kamis";
+              break;
+            case 6:
+              uh = "Jumat";
+              break;
+            case  7:
+              uh = "Sabtu";
+          }
+          const hasilUh = document.getElementById("uh-bp");
+          hasilUh.innerHTML = `<p>${uh}</p>`;
+          const utbphari = document.getElementById("utbphari");
+          utbphari.innerHTML = `<p>${uh}</p>`;
+
+          ljd = (Number(ujd) + 7 /24).toFixed(5);
+          const hasilLjd = document.getElementById("ljd-bp");
+          hasilLjd.innerHTML = `<p>${ljd} hari</p>`;
+
+          ljdsum = (Number(ljd) + Number(0.5)).toFixed(5);
+          const hasilLjdSum = document.getElementById("ljdsum-bp");
+          hasilLjdSum.innerHTML = `<p>${ljdsum}</p>`;
+
+          lz = parseInt(ljdsum);
+          const hasilLz = document.getElementById("lz-bp");
+          hasilLz.innerHTML = `<p>${lz}</p>`;
+
+          lf = (ljdsum - lz).toFixed(5);
+          const hasilLf = document.getElementById("lf-bp");
+          hasilLf.innerHTML = `<p>${lf}</p>`;
+
+          lalpha = parseInt((lz-1867216.25)/36524.25);
+          const hasilLalpha = document.getElementById("lalpha-bp");
+          hasilLalpha.innerHTML = `<p>${lalpha}</p>`;
+
+          if(lz<2299161){
+            la = lz;
+          }else{
+            la = lz+1+lalpha-parseInt(lalpha/4);
+          }
+          const hasilLa = document.getElementById("la-bp");
+          hasilLa.innerHTML = `<p>${la}</p>`;
+
+          lb = la+1524;
+          const hasilLb = document.getElementById("lb-bp");
+          hasilLb.innerHTML = `<p>${lb}</p>`;
+
+          lc = parseInt((lb-122.1)/365.25);
+          const hasilLc = document.getElementById("lc-bp");
+          hasilLc.innerHTML = `<p>${lc}</p>`;
+
+          ld = parseInt(365.25*lc);
+          const hasilLd = document.getElementById("ld-bp");
+          hasilLd.innerHTML = `<p>${ld}</p>`;
+
+          le = parseInt((lb-ld)/30.6001);
+          const hasilLe = document.getElementById("le-bp");
+          hasilLe.innerHTML = `<p>${le}</p>`;
+
+          if (le < 14) {
+            lbulan = le-1;
+          }else {
+            lbulan = le-13;
+          }
+          const hasilLbulan = document.getElementById("lbulan-bp");
+          hasilLbulan.innerHTML = `<p>${lbulan}</p>`;
+          const lbpbulan = document.getElementById("lbpbulan");
+          lbpbulan.innerHTML = `<p>${month[lbulan - 1]}</p>`;
+
+          if (lbulan > 2) {
+            ltahun = lc-4716;
+          } else {
+            ltahun = lc-4715;
+          }
+          const hasilLtahun = document.getElementById("ltahun-bp");
+          hasilLtahun.innerHTML = `<p>${ltahun}</p>`;
+          const lbptahun = document.getElementById("lbptahun");
+          lbptahun.innerHTML = `<p>${ltahun}</p>`;
+
+          ltp = ((lb-ld)-parseInt(30.6001*le)) + parseFloat(lf);
+          const hasilLtp = document.getElementById("ltp-bp");
+          hasilLtp.innerHTML = `<p>${ltp}</p>`;
+
+          ltb = parseInt(ltp);
+          const hasilLtb = document.getElementById("ltb-bp");
+          hasilLtb.innerHTML = `<p>${ltb}</p>`;
+          const lbptanggal = document.getElementById("lbptanggal");
+          lbptanggal.innerHTML = `<p>${ltb}</p>`;
+
+          lt = (ltp-ltb).toFixed(5);
+          const hasilLt = document.getElementById("lt-bp");
+          hasilLt.innerHTML = `<p>${dateLocal.getHours()} : ${dateLocal.getMinutes()} : ${dateLocal.getSeconds()}</p>`;
+
+          lnh = parseInt((Number(ljd)+1.5)%7) + 1;
+          const hasilLnh = document.getElementById("lnh-bp");
+          hasilLnh.innerHTML = `<p>${lnh}</p>`;
+
+          let lh;
+          switch (lnh) {
+            case 1:
+              lh = "Minggu";
+              break;
+            case 2:
+              lh = "Senin";
+              break;
+            case 3:
+              lh = "Selasa";
+              break;
+            case 4:
+              lh = "Rabu";
+              break;
+            case 5:
+              lh = "Kamis";
+              break;
+            case 6:
+              lh = "Jumat";
+              break;
+            case  7:
+              lh = "Sabtu";
+          }
+          const hasilLh = document.getElementById("lh-bp");
+          hasilLh.innerHTML = `<p>${lh}</p>`;
+          const lbphari = document.getElementById("lbphari");
+          lbphari.innerHTML = `<p>${lh}</p>`;
+
+        }
+
+        function lastMoon(){
+          k = ((Math.abs(12 * tahun) + Math.abs(bulan)) - 17050) + Math.abs(0.75);
+          const hasilK = document.getElementById("k-sa");
+          hasilK.innerHTML = `<p>${k}</p>`;
+
+          t = (k / 1236.85).toFixed(10)
+          const hasilT = document.getElementById("t-sa");
+          hasilT.innerHTML = `<p>${t}</p>`;
+
+          e = (1.0 - t * ( 0.002516 - ( 0.0000074 * t))).toFixed(5);
+          const hasilE = document.getElementById("e-sa");
+          hasilE.innerHTML = `<p>${e}</p>`;
+
+          m = (DEGRAD * (((2.5534 + 29.10535669 * k) - 0.0000014 * t * t - ( 0.00000011  * t * t * t)) % 360)).toFixed(5);
+          const hasilM = document.getElementById("m-sa");
+          hasilM.innerHTML = `<p>${m} radian</p>`;
+
+          mprime = (DEGRAD * (((201.5643 + 385.81693528 * k) + 0.0107582 * t * t + (0.00001238 * t * t * t) - (0.000000058 * t * t * t))% 360)).toFixed(5);
+          const hasilMprime = document.getElementById("mprime-sa");
+          hasilMprime.innerHTML = `<p>${mprime} radian</p>`;
+
+          f = (DEGRAD * (((160.7108 + 390.67050274 * k) - 0.0016118 * t * t - (0.0016118 * t * t) - ((0.00000227 * t * t * t) + (0.000000011 * t * t * t * t)))% 360)).toFixed(5);
+          const hasilF = document.getElementById("f-sa");
+          hasilF.innerHTML = `<p>${f} radian</p>`;
+
+          omega = (DEGRAD * (360 + (124.7746-1.56375588*k+0.0020672*t*t+0.00000215*t*t*t))).toFixed(5);
+          const hasilO = document.getElementById("omega-sa");
+          hasilO.innerHTML = `<p>${omega} radian</p>`;
+
+          a[0] =  (DEGRAD * (299.77 + (0.107408  * k) - (0.009173 * t * t))).toFixed(5);
+          a[1] =  (DEGRAD * (251.88 + (0.016321  * k))).toFixed(5);
+          a[2] =  (DEGRAD * (251.83 + (26.651886 * k))).toFixed(5);
+          a[3] =  (DEGRAD * (349.42 + (36.412478 * k))).toFixed(5);
+          a[4] =  (DEGRAD * (84.66  + (18.206239 * k))).toFixed(5);
+          a[5] =  (DEGRAD * (141.74 + (53.303771 * k))).toFixed(5);
+          a[6] =  (DEGRAD * (207.14 + (2.453732  * k))).toFixed(5);
+          a[7] =  (DEGRAD * (154.84 + (7.306860  * k))).toFixed(5);
+          a[8] =  (DEGRAD * (34.52  + (27.261239 * k))).toFixed(5);
+          a[9] =  (DEGRAD * (207.19 + (0.121824  * k))).toFixed(5);
+          a[10] = (DEGRAD * (291.34 + (1.844379  * k))).toFixed(5);
+          a[11] = (DEGRAD * (161.72 + (24.198154 * k))).toFixed(5);
+          a[12] = (DEGRAD * (239.56 + (25.513099 * k))).toFixed(5);
+          a[13] = (DEGRAD * (331.55 + (3.592518  * k))).toFixed(5);
+
+          const hasilA1 = document.getElementById("a1-sa");
+          hasilA1.innerHTML = `<p>${a[0]} radian</p>`;
+
+          const hasilA2 = document.getElementById("a2-sa");
+          hasilA2.innerHTML = `<p>${a[1]} radian</p>`;
+
+          const hasilA3 = document.getElementById("a3-sa");
+          hasilA3.innerHTML = `<p>${a[2]} radian</p>`;
+
+          const hasilA4 = document.getElementById("a4-sa");
+          hasilA4.innerHTML = `<p>${a[3]} radian</p>`;
+
+          const hasilA5 = document.getElementById("a5-sa");
+          hasilA5.innerHTML = `<p>${a[4]} radian</p>`;
+
+          const hasilA6 = document.getElementById("a6-sa");
+          hasilA6.innerHTML = `<p>${a[5]} radian</p>`;
+
+          const hasilA7 = document.getElementById("a7-sa");
+          hasilA7.innerHTML = `<p>${a[6]} radian</p>`;
+
+          const hasilA8 = document.getElementById("a8-sa");
+          hasilA8.innerHTML = `<p>${a[7]} radian</p>`;
+
+          const hasilA9 = document.getElementById("a9-sa");
+          hasilA9.innerHTML = `<p>${a[8]} radian</p>`;
+
+          const hasilA10 = document.getElementById("a10-sa");
+          hasilA10.innerHTML = `<p>${a[9]} radian</p>`;
+
+          const hasilA11 = document.getElementById("a11-sa");
+          hasilA11.innerHTML = `<p>${a[10]} radian</p>`;
+
+          const hasilA12 = document.getElementById("a12-sa");
+          hasilA12.innerHTML = `<p>${a[11]} radian</p>`;
+
+          const hasilA13 = document.getElementById("a13-sa");
+          hasilA13.innerHTML = `<p>${a[12]} radian</p>`;
+
+          const hasilA14 = document.getElementById("a14-sa");
+          hasilA14.innerHTML = `<p>${a[13]} radian</p>`;
+
+          jde = (2451550.09766+29.530588861*k+0.00015437*t*t-0.00000015*t*t*t+0.00000000073*t*t*t*t).toFixed(5);
+          const hasilJde = document.getElementById("jde-sa");
+          hasilJde.innerHTML = `<p>${jde} hari</p>`;
+
+          kap =  ((325*Math.sin(a[0])+165*Math.sin(a[1])+164*Math.sin(a[2])+126*Math.sin(a[3])+
+                  110*Math.sin(a[4])+62*Math.sin(a[5])+60*Math.sin(a[6])+56*Math.sin(a[7])+
+                  47*Math.sin(a[8])+42*Math.sin(a[9])+40*Math.sin(a[10])+37*Math.sin(a[11])+
+                  35*Math.sin(a[12])+23*Math.sin(a[13]))/1000000).toFixed(5);
+          const hasilKap = document.getElementById("kap-sa");
+          hasilKap.innerHTML = `<p>${kap} hari</p>`;
+
+          kf = ((
+                  -62801*Math.sin(mprime)+17172*e*Math.sin(m)-1183*e*Math.sin(Number(mprime)+Number(m))+862*Math.sin(2*mprime)+804*Math.sin(2*f)
+                  +454*e*Math.sin(mprime-m)+204*e*e*Math.sin(2*m)-180*Math.sin(mprime-2*f)-70*Math.sin(Number(mprime)+2*f)
+                  -40*Math.sin(3*mprime)-34*e*Math.sin(2*mprime-m)+32*e*Math.sin(Number(m)+2*f)+32*e*Math.sin(m-2*f)
+                  -28*e*e*Math.sin(Number(mprime)+2*m)+27*e*Math.sin(2*Number(mprime)+Number(m))-17*Math.sin(omega)-5*Math.sin(mprime-m-2*f)
+                  +4*Math.sin(2*(Number(mprime)+Number(f)))-4*Math.sin(Number(mprime)+Number(m)+2*f)+4*Math.sin(mprime-2*m)+3*Math.sin(3*m)+3*Math.sin(Number(mprime)+Number(m)-2*f)
+                  +2*Math.sin(2*(mprime-f))+2*Math.sin(mprime-Number(m)+2*f)-2*Math.sin(3*Number(mprime)+Number(m))
+                  -(306-38*e*Math.cos(m)+26*Math.cos(mprime)-2*Math.cos(mprime-m)+2*Math.cos(Number(mprime)+Number(m))+2*Math.cos(2*f))
+          )/100000).toFixed(5);
+          const hasilKf = document.getElementById("kf-sa");
+          hasilKf.innerHTML = `<p>${kf} hari</p>`;
+
+          td = (Number(jde) + Number(kap) + Number(kf)).toFixed(5);
+          const hasilTd = document.getElementById("td-sa");
+          hasilTd.innerHTML = `<p>${td} hari</p>`;
+
+          deltaT = (findDeltaT/86400).toFixed(5);
+          const hasilDeltaT = document.getElementById("deltat-sa");
+          hasilDeltaT.innerHTML = `<p>${deltaT} hari</p>`;
+
+          ujd = (td - deltaT).toFixed(5);
+          const hasilUjd = document.getElementById("ujd-sa");
+          hasilUjd.innerHTML = `<p>${ujd} hari</p>`;
+          let millis = (ujd - 2440587.5) * 86400000;
+          let dateLocal = new Date(millis);
+          const utsajam = document.getElementById("utsajam");
+          utsajam.innerHTML = `<p>${dateLocal.getUTCHours()} : ${dateLocal.getUTCMinutes()} : ${dateLocal.getUTCSeconds()}</p>`;
+          const lsajam = document.getElementById("lsajam");
+          lsajam.innerHTML = `<p>${dateLocal.getHours()} : ${dateLocal.getMinutes()} : ${dateLocal.getSeconds()}</p>`;
+
+
+          ujdsum = (Number(ujd) + Number(0.5)).toFixed(5);
+          const hasilUjdSum = document.getElementById("ujdsum-sa");
+          hasilUjdSum.innerHTML = `<p>${ujdsum}</p>`;
+
+          uz = parseInt(ujdsum);
+          const hasilUz = document.getElementById("uz-sa");
+          hasilUz.innerHTML = `<p>${uz}</p>`;
+
+          uf = (ujdsum - uz).toFixed(5);
+          const hasilUf = document.getElementById("uf-sa");
+          hasilUf.innerHTML = `<p>${uf}</p>`;
+
+          ualpha = parseInt((uz-1867216.25)/36524.25);
+          const hasilUalpha = document.getElementById("ualpha-sa");
+          hasilUalpha.innerHTML = `<p>${ualpha}</p>`;
+
+          if(uz<2299161){
+            ua = uz;
+          }else{
+            ua = uz+1+ualpha-parseInt(ualpha/4);
+          }
+          const hasilUa = document.getElementById("ua-sa");
+          hasilUa.innerHTML = `<p>${ua}</p>`;
+
+          ub = ua+1524;
+          const hasilUb = document.getElementById("ub-sa");
+          hasilUb.innerHTML = `<p>${ub}</p>`;
+
+          uc = parseInt((ub-122.1)/365.25);
+          const hasilUc = document.getElementById("uc-sa");
+          hasilUc.innerHTML = `<p>${uc}</p>`;
+
+          ud = parseInt(365.25*uc);
+          const hasilUd = document.getElementById("ud-sa");
+          hasilUd.innerHTML = `<p>${ud}</p>`;
+
+          ue = parseInt((ub-ud)/30.6001);
+          const hasilUe = document.getElementById("ue-sa");
+          hasilUe.innerHTML = `<p>${ue}</p>`;
+
+          if (ue < 14) {
+            ubulan = ue-1;
+          }else {
+            ubulan = ue-13;
+          }
+          const hasilUbulan = document.getElementById("ubulan-sa");
+          hasilUbulan.innerHTML = `<p>${ubulan}</p>`;
+          const utsabulan = document.getElementById("utsabulan");
+          utsabulan.innerHTML = `<p>${month[ubulan-1]}</p>`;
+
+          if (ubulan > 2) {
+            utahun = uc-4716;
+          } else {
+            utahun = uc-4715;
+          }
+          const hasilUtahun = document.getElementById("utahun-sa");
+          hasilUtahun.innerHTML = `<p>${utahun}</p>`;
+          const utsatahun = document.getElementById("utsatahun");
+          utsatahun.innerHTML = `<p>${utahun}</p>`;
+
+          utp = ((ub-ud)-parseInt(30.6001*ue)) + parseFloat(uf);
+          let utpfix = utp.toFixed(5);
+          const hasilUtp = document.getElementById("utp-sa");
+          hasilUtp.innerHTML = `<p>${utpfix}</p>`;
+
+          utb = parseInt(utp);
+          const hasilUtb = document.getElementById("utb-sa");
+          hasilUtb.innerHTML = `<p>${utb}</p>`;
+          const utsatanggal = document.getElementById("utsatanggal");
+          utsatanggal.innerHTML = `<p>${utb}</p>`;
+
+          ut = (utp-utb).toFixed(5);
+          const hasilUt = document.getElementById("ut-sa");
+          hasilUt.innerHTML = `<p>${dateLocal.getUTCHours()} : ${dateLocal.getUTCMinutes()} : ${dateLocal.getUTCSeconds()}</p>`;
+
+          unh = parseInt((Number(ujd)+1.5)%7) + 1;
+          const hasilUnh = document.getElementById("unh-sa");
+          hasilUnh.innerHTML = `<p>${unh}</p>`;
+
+          let uh;
+          switch (unh) {
+            case 1:
+              uh = "Minggu";
+              break;
+            case 2:
+              uh = "Senin";
+              break;
+            case 3:
+              uh = "Selasa";
+              break;
+            case 4:
+              uh = "Rabu";
+              break;
+            case 5:
+              uh = "Kamis";
+              break;
+            case 6:
+              uh = "Jumat";
+              break;
+            case  7:
+              uh = "Sabtu";
+          }
+          const hasilUh = document.getElementById("uh-sa");
+          hasilUh.innerHTML = `<p>${uh}</p>`;
+          const utsahari = document.getElementById("utsahari");
+          utsahari.innerHTML = `<p>${uh}</p>`;
+
+          ljd = (Number(ujd) + 7 /24).toFixed(5);
+          const hasilLjd = document.getElementById("ljd-sa");
+          hasilLjd.innerHTML = `<p>${ljd} hari</p>`;
+
+          ljdsum = (Number(ljd) + Number(0.5)).toFixed(5);
+          const hasilLjdSum = document.getElementById("ljdsum-sa");
+          hasilLjdSum.innerHTML = `<p>${ljdsum}</p>`;
+
+          lz = parseInt(ljdsum);
+          const hasilLz = document.getElementById("lz-sa");
+          hasilLz.innerHTML = `<p>${lz}</p>`;
+
+          lf = (ljdsum - lz).toFixed(5);
+          const hasilLf = document.getElementById("lf-sa");
+          hasilLf.innerHTML = `<p>${lf}</p>`;
+
+          lalpha = parseInt((lz-1867216.25)/36524.25);
+          const hasilLalpha = document.getElementById("lalpha-sa");
+          hasilLalpha.innerHTML = `<p>${lalpha}</p>`;
+
+          if(lz<2299161){
+            la = lz;
+          }else{
+            la = lz+1+lalpha-parseInt(lalpha/4);
+          }
+          const hasilLa = document.getElementById("la-sa");
+          hasilLa.innerHTML = `<p>${la}</p>`;
+
+          lb = la+1524;
+          const hasilLb = document.getElementById("lb-sa");
+          hasilLb.innerHTML = `<p>${lb}</p>`;
+
+          lc = parseInt((lb-122.1)/365.25);
+          const hasilLc = document.getElementById("lc-sa");
+          hasilLc.innerHTML = `<p>${lc}</p>`;
+
+          ld = parseInt(365.25*lc);
+          const hasilLd = document.getElementById("ld-sa");
+          hasilLd.innerHTML = `<p>${ld}</p>`;
+
+          le = parseInt((lb-ld)/30.6001);
+          const hasilLe = document.getElementById("le-sa");
+          hasilLe.innerHTML = `<p>${le}</p>`;
+
+          if (le < 14) {
+            lbulan = le-1;
+          }else {
+            lbulan = le-13;
+          }
+          const hasilLbulan = document.getElementById("lbulan-sa");
+          hasilLbulan.innerHTML = `<p>${lbulan}</p>`;
+          const lsabulan = document.getElementById("lsabulan");
+          lsabulan.innerHTML = `<p>${month[lbulan - 1]}</p>`;
+
+          if (lbulan > 2) {
+            ltahun = lc-4716;
+          } else {
+            ltahun = lc-4715;
+          }
+          const hasilLtahun = document.getElementById("ltahun-sa");
+          hasilLtahun.innerHTML = `<p>${ltahun}</p>`;
+          const lsatahun = document.getElementById("lsatahun");
+          lsatahun.innerHTML = `<p>${ltahun}</p>`;
+
+          ltp = ((lb-ld)-parseInt(30.6001*le)) + parseFloat(lf);
+          const hasilLtp = document.getElementById("ltp-sa");
+          hasilLtp.innerHTML = `<p>${ltp}</p>`;
+
+          ltb = parseInt(ltp);
+          const hasilLtb = document.getElementById("ltb-sa");
+          hasilLtb.innerHTML = `<p>${ltb}</p>`;
+          const lsatanggal = document.getElementById("lsatanggal");
+          lsatanggal.innerHTML = `<p>${ltb}</p>`;
+
+          lt = (ltp-ltb).toFixed(5);
+          const hasilLt = document.getElementById("lt-sa");
+          hasilLt.innerHTML = `<p>${dateLocal.getHours()} : ${dateLocal.getMinutes()} : ${dateLocal.getSeconds()}</p>`;
+
+          lnh = parseInt((Number(ljd)+1.5)%7) + 1;
+          const hasilLnh = document.getElementById("lnh-sa");
+          hasilLnh.innerHTML = `<p>${lnh}</p>`;
+
+          let lh;
+          switch (lnh) {
+            case 1:
+              lh = "Minggu";
+              break;
+            case 2:
+              lh = "Senin";
+              break;
+            case 3:
+              lh = "Selasa";
+              break;
+            case 4:
+              lh = "Rabu";
+              break;
+            case 5:
+              lh = "Kamis";
+              break;
+            case 6:
+              lh = "Jumat";
+              break;
+            case  7:
+              lh = "Sabtu";
+          }
+          const hasilLh = document.getElementById("lh-sa");
+          hasilLh.innerHTML = `<p>${lh}</p>`;
+          const lsahari = document.getElementById("lsahari");
+          lsahari.innerHTML = `<p>${lh}</p>`;
+
+        }
+
+        newMoon();
+        quarterMoon();
+        fullMoon();
+        lastMoon();
+
+      }
+
+      moonPhase();
+
+    }
+</script>
+
+</body>
+</html>
